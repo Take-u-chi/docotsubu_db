@@ -72,4 +72,25 @@ public boolean create(Mutter mutter) {
 	    return true;
 		}
 
+public boolean mutterSearch(Mutter mutter) {
+
+//データベースへ接続
+	try(Connection conn = DriverManager.getConnection(JDBC_URL,DB_USER,DB_PASS)){
+
+//SELECT文の準備
+	String sql = "SELECT NAME,TEXT FROM MUTTER";
+	PreparedStatement pStmt = conn.prepareStatement(sql);
+
+//SELECT文の実行
+	ResultSet rs = pStmt.executeQuery();
+
+
+	} catch (SQLException e) {
+		e.printStackTrace();
+		return false;
+	}
+	return false;
+
+}
+
 }

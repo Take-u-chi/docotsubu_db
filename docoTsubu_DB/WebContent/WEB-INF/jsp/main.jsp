@@ -32,11 +32,16 @@
 	</form>
 <!-- 入力値異常を受け取ったらエラーメッセージを表示 -->
 	<% if(errorMsg != null){ %>
-	 <p><%= errorMsg %></p>
+	<p style="color:red;">
+	 <%= errorMsg %></p>
 	<% } %>
 <!-- ArrayListに格納されたインスタンスを先頭から順に取得 -->
 	<% for(Mutter mutter : mutterList){ %>
 	 <p><%=mutter.getUserName() %>：<%= mutter.getText()%></p>
 	<%} %>
+
+	<from action="/docoTsubu_DB/MutterSearch"method="post">
+	<input type="text"name="text">
+	<input type="submit"value="検索">
 	</body>
 	</html>

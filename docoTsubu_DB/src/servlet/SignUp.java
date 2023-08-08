@@ -35,12 +35,13 @@ public class SignUp extends HttpServlet {
 		request.setAttribute("errorMsg", "ユーザー名は英数字で4〜20字です");
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/signUp.jsp");
 		dispatcher.forward(request, response);
+
 		}
-		if(!sul.isValidPass(pass)){
+		else if(!sul.isValidPass(pass)){
 		request.setAttribute("errorMsg","パスワードは8〜16字です");
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/signUp.jsp");
 		dispatcher.forward(request, response);
-		}
+		}else {
 
 	//ユーザー登録
 		User user = new User(name,pass);
@@ -60,3 +61,4 @@ public class SignUp extends HttpServlet {
 		}
 	}
 	}
+}
