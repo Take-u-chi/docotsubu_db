@@ -10,8 +10,11 @@ public class Mutter implements Serializable{
 
 //コンストラクタ
 	public Mutter(){}
-	public Mutter(String userName,String text) {;
+	public Mutter(String userName,String text) {
 		this.userName = userName;
+		this.text = text;
+	}
+	public Mutter(String text) {
 		this.text = text;
 	}
 	public Mutter(int id,String userName,String text) {

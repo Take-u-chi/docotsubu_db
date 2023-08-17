@@ -11,4 +11,13 @@ public class GetMutterListLogic {
 		List<Mutter>mutterList = dao.findAll();
 		return mutterList;
 	}
+
+public List<Mutter>searchMutter(String searchText){
+		MutterDAO dao = new MutterDAO();
+	    List<Mutter>searchMutterList = dao.mutterSearch(searchText);
+	    if(searchMutterList != null) {
+	    return searchMutterList;
+        }else {
+        }return null;
+}
 }

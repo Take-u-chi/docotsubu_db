@@ -9,6 +9,7 @@
 <!-- リクエストスコープに保存されたエラーメッセージを取得 -->
 <% String errorMsg = (String)request.getAttribute("errorMsg"); %>
 
+
 <!-- メイン画面を出力するビュー -->
 
 	<!DOCTYPE html>
@@ -24,6 +25,7 @@
 	<a href="/docoTsubu_DB/Logout">ログアウト</a>
 	</p>
 	<p><a href="/docoTsubu_DB/Main">更新</a></p>
+	<p><a href="/search.jsp"><a>検索</a></p>
 
 <!-- textを受け取りMain.javaへPostリクエスト -->
 	<form action="/docoTsubu_DB/Main"method="post">
@@ -40,8 +42,6 @@
 	 <p><%=mutter.getUserName() %>：<%= mutter.getText()%></p>
 	<%} %>
 
-	<from action="/docoTsubu_DB/MutterSearch"method="post">
-	<input type="text"name="text">
-	<input type="submit"value="検索">
+
 	</body>
 	</html>

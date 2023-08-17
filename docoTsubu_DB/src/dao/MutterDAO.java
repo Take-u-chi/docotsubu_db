@@ -72,25 +72,38 @@ public boolean create(Mutter mutter) {
 	    return true;
 		}
 
-public boolean mutterSearch(Mutter mutter) {
+
+//検索機能（途中）
+public List<Mutter> mutterSearch(String searchText) {
+	List<Mutter>searchMutterList = new ArrayList<>();
 
 //データベースへ接続
 	try(Connection conn = DriverManager.getConnection(JDBC_URL,DB_USER,DB_PASS)){
 
 //SELECT文の準備
-	String sql = "SELECT NAME,TEXT FROM MUTTER";
+	String sql = "SELECT * FROM MUTTER WHERE TEXT LIKE ?";
 	PreparedStatement pStmt = conn.prepareStatement(sql);
-
+	pStmt.setString(1,"%" + searchText + "%");
 //SELECT文の実行
 	ResultSet rs = pStmt.executeQuery();
+	while(rs.next()) {
+		int id = rs.getInt("ID");
+		String userName = rs.getString("NAME");
+		String text = rs.getString("TEXT");
+		Mutter searchMutter = new Mutter(id,userName,text);
+		searchMutterList.add(searchMutter);
+
+	}
+
 
 
 	} catch (SQLException e) {
 		e.printStackTrace();
-		return false;
+		return null;
 	}
-	return false;
+	return searchMutterList ;
+
+
 
 }
-
 }
