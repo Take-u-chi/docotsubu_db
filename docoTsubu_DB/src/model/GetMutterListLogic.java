@@ -15,9 +15,13 @@ public class GetMutterListLogic {
 public List<Mutter>searchMutter(String searchText){
 		MutterDAO dao = new MutterDAO();
 	    List<Mutter>searchMutterList = dao.mutterSearch(searchText);
-	    if(searchMutterList != null) {
+
 	    return searchMutterList;
-        }else {
-        }return null;
+      }
+public boolean deleteMutter(String id) {
+		MutterDAO dao = new MutterDAO();
+		dao.deleteMutter(id);
+	return true;
+
 }
 }

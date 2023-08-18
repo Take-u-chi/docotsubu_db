@@ -73,7 +73,7 @@ public boolean create(Mutter mutter) {
 		}
 
 
-//検索機能（途中）
+//つぶやき検索機能（入力されたテキストで検索する）
 public List<Mutter> mutterSearch(String searchText) {
 	List<Mutter>searchMutterList = new ArrayList<>();
 
@@ -83,9 +83,11 @@ public List<Mutter> mutterSearch(String searchText) {
 //SELECT文の準備
 	String sql = "SELECT * FROM MUTTER WHERE TEXT LIKE ?";
 	PreparedStatement pStmt = conn.prepareStatement(sql);
-	pStmt.setString(1,"%" + searchText + "%");
+	pStmt.setString(1,"%" + searchText +"%");
+
 //SELECT文の実行
 	ResultSet rs = pStmt.executeQuery();
+
 	while(rs.next()) {
 		int id = rs.getInt("ID");
 		String userName = rs.getString("NAME");
@@ -94,16 +96,35 @@ public List<Mutter> mutterSearch(String searchText) {
 		searchMutterList.add(searchMutter);
 
 	}
-
-
-
 	} catch (SQLException e) {
 		e.printStackTrace();
 		return null;
 	}
+//SELECT文の結果を配列に入れて返す（該当するものがなければ空の配列を返す）
 	return searchMutterList ;
 
-
-
 }
+public boolean deleteMutter(String id) {
+
+	//データベースへ接続
+		try(Connection conn = DriverManager.getConnection(JDBC_URL,DB_USER,DB_PASS)){
+
+	//DELETE文の準備
+			String sql = "DELETE FROM MUTTER WHERE id = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, id);
+
+			// SQLの実行
+			pStmt.executeUpdate();
+			// コミット
+			conn.commit();
+			System.out.println("削除処理が成功しました");
+
+
+			}catch(SQLException e) {
+				e.printStackTrace();
+				return false;
+			}
+		    return true;
+			}
 }
