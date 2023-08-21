@@ -10,6 +10,9 @@ public class Account {
 	 this.name = name;
 	 this.pass = pass;
  }
+ public Account(int userId) {
+	 this.userId = userId;
+ }
 
 public int getUserId() {
 	return userId;

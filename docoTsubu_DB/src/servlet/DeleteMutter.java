@@ -39,16 +39,18 @@ public class DeleteMutter extends HttpServlet {
 		String deleteText = request.getParameter("id");
 		GetMutterListLogic getMutterListLogic = new GetMutterListLogic();
 
+
+
 		if(deleteText == null) {
-			request.setAttribute("errorMsg", "IDを入力して下さい");
+			request.setAttribute("errorMsg1", "IDを入力して下さい");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/search.jsp");
 		    dispatcher.forward(request, response);
 		}else if(!getMutterListLogic.deleteMutter(deleteText)) {
-			request.setAttribute("errorMsg1", "該当の投稿はありませんでした");
+			request.setAttribute("errorMsg2", "該当の投稿はありませんでした");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/search.jsp");
 		    dispatcher.forward(request, response);
 		}else {
-			request.setAttribute("resultMsg", "投稿を削除しました");
+			request.setAttribute("resultMsg", "投稿ID："+ deleteText +"を削除しました");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/search.jsp");
 		    dispatcher.forward(request, response);
 		}

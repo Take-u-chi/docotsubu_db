@@ -106,25 +106,60 @@ public List<Mutter> mutterSearch(String searchText) {
 }
 public boolean deleteMutter(String id) {
 
+
 	//データベースへ接続
 		try(Connection conn = DriverManager.getConnection(JDBC_URL,DB_USER,DB_PASS)){
+			String sql = "SELECT * FROM MUTTER WHERE id = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+		    pStmt.setString(1, id);
+		    ResultSet rs = pStmt.executeQuery();
+
+		    if(rs.next()) {
 
 	//DELETE文の準備
-			String sql = "DELETE FROM MUTTER WHERE id = ?";
-			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setString(1, id);
+			String sql2 = "DELETE FROM MUTTER WHERE id = ?";
+			PreparedStatement pStmt2 = conn.prepareStatement(sql2);
 
-			// SQLの実行
-			pStmt.executeUpdate();
-			// コミット
-			conn.commit();
-			System.out.println("削除処理が成功しました");
+		    pStmt2.setString(1, id);
+
+	// SQLの実行
+		    pStmt2.executeUpdate();
+		    return true;
+		    }
 
 
 			}catch(SQLException e) {
 				e.printStackTrace();
 				return false;
+			}return false;
 			}
-		    return true;
-			}
+
+public List<Mutter> myMutterFindAll(String name){   // 戻り値List<Mutter>
+	List<Mutter>myMutterList = new ArrayList<>();
+
+//データベースへ接続
+	try(Connection conn = DriverManager.getConnection(JDBC_URL,DB_USER,DB_PASS)){
+		String findName = name;
+//SELECT文の準備
+	String sql = "SELECT ID,NAME,TEXT FROM MUTTER WHERE NAME=? ORDER BY ID DESC";//ID降順(大きい順)に並び替える
+	PreparedStatement pStmt = conn.prepareStatement(sql);
+	pStmt.setString(1, findName);
+//SELECT文の実行
+	ResultSet rs = pStmt.executeQuery();
+
+//SELECT文の結果をArrayListに格納
+	while(rs.next()) {
+		int id = rs.getInt("ID");
+		String userName = rs.getString("NAME");
+		String text = rs.getString("TEXT");
+		Mutter mutter = new Mutter(id,userName,text);
+		myMutterList.add(mutter);
+
+	}
+	}catch(SQLException e) {
+		e.printStackTrace();
+		return null;
+	}
+     return myMutterList;
+}
 }

@@ -3,6 +3,7 @@
     <%@ page import="model.User,model.Mutter,java.util.List" %>
     <% String errorMsg = (String)request.getAttribute("errorMsg"); %>
     <% String errorMsg1 = (String)request.getAttribute("errorMsg1"); %>
+    <% String errorMsg2 = (String)request.getAttribute("errorMsg2"); %>
      <% String resultMsg = (String)request.getAttribute("resultMsg"); %>
 
     <% List<Mutter> searchList = (List<Mutter>)session.getAttribute("searchList");%>
@@ -46,14 +47,19 @@
 <% if(errorMsg1 != null){ %>
 	<p style="color:red;">
 	 <%= errorMsg1 %></p>
-	<% } %>
-<% if(resultMsg != null){%>
+	<% }else if(errorMsg2 != null){ %>
+		<p style="color:red;">
+	 <%= errorMsg2 %></p>
+
+	<%} %>
+<%  if(resultMsg != null){%>
 <p style="color:red;"><%= resultMsg %>
 <%} %>
 
 <p><a href="/docoTsubu_DB/Main">戻る</a></p>
 
 </body>
+
 <script type="text/javascript">
 	function Delete_Dialog(){
 		var res = confirm("選択したデータを削除します。よろしいですか?");
@@ -64,4 +70,5 @@
 		};
 	};
 </script>
+
 </html>

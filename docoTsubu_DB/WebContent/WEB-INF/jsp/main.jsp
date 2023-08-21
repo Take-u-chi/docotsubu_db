@@ -9,7 +9,7 @@
 <!-- リクエストスコープに保存されたエラーメッセージを取得 -->
 <% String errorMsg = (String)request.getAttribute("errorMsg"); %>
 
-<% List<Mutter> searchList = (List<Mutter>)session.getAttribute("searchList");%>
+
 <!-- メイン画面を出力するビュー -->
 
 	<!DOCTYPE html>
@@ -26,6 +26,7 @@
 	</p>
 	<p><a href="/docoTsubu_DB/Main">更新</a></p>
 	<p><a href="/docoTsubu_DB/MutterSearch">検索</a></p>
+	<p><a href="/docoTsubu_DB/MyPage">マイページ</a></p>
 
 <!-- textを受け取りMain.javaへPostリクエスト -->
 	<form action="/docoTsubu_DB/Main"method="post">

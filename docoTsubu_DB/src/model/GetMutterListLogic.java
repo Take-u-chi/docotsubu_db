@@ -20,8 +20,17 @@ public List<Mutter>searchMutter(String searchText){
       }
 public boolean deleteMutter(String id) {
 		MutterDAO dao = new MutterDAO();
-		dao.deleteMutter(id);
-	return true;
+		if(dao.deleteMutter(id)) {
+			return true;
+		}else {
+	     return false;
+		}
+}
+public List<Mutter>searchMyMutter(String name){
+	MutterDAO dao = new MutterDAO();
+	List<Mutter>myMutterList = dao.myMutterFindAll(name);
+
+	return myMutterList;
 
 }
 }
