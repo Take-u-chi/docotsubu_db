@@ -38,7 +38,7 @@ public class MyPage extends HttpServlet {
 					application.setAttribute("myMutterList", myMutterList);
 
 
-					RequestDispatcher dispatcher = request.getRequestDispatcher("/myPage.jsp");
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/myPage.jsp");
 				dispatcher.forward(request, response);
 			}
 			}
@@ -53,14 +53,14 @@ public class MyPage extends HttpServlet {
 
 		if(!getMutterListLogic.deleteMutter(id)) {
 			request.setAttribute("errorMsg", "削除できませんでした");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/myPage.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/myPage.jsp");
 		    dispatcher.forward(request, response);
 		}else {
 			request.setAttribute("errorMsg", "削除しました");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/myPage.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/myPage.jsp");
 		    dispatcher.forward(request, response);
 
-//			response.sendRedirect("/docoTsubu_DB/MyPage");
+
 		}
 	}
 

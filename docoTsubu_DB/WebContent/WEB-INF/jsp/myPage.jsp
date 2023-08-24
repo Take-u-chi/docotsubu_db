@@ -12,26 +12,32 @@
 </head>
 <body>
 <h1>マイページ</h1>
-<h3>投稿一覧</h3>
+<h2>投稿一覧</h2>
+<a href="/docoTsubu_DB/MyPage">更新</a>
 
-<form action="/docoTsubu_DB/MyPage"method="post">
+
 
 <table>
-<tr><th>選択</th><th>名前</th><th>投稿</th></tr>
+    <tr>
+    <th>選択</th>
+    <td>名前</td>
+    <td>投稿</td>
+    </tr>
 
-<% if(myMutterList != null){ %>
-<% for (Mutter mutter : myMutterList){ %>
-<tr><td><input type="radio" name="id" value=<%=mutter.getId() %> >
-        <input type="submit"value="削除"></td>
-        </form>
+    <form action="/docoTsubu_DB/MyPage"method="post">
+    <tr>
+    <% if(myMutterList != null){ %>
+    <% for (Mutter mutter : myMutterList){ %>
+    <th><input type="radio" name="id" value=<%=mutter.getId() %>>
+    <input type="submit"value="削除"></th>
 
-    <td><%= mutter.getUserName() %></td>
-    <td><%= mutter.getText() %></tr>
-    <br>
+    <td><%= mutter.getUserName() %> </td>
+    <td><%= mutter.getText() %></td>
+    </tr>
+<%} %>
+<%} %>
+   </form>
 </table>
-<%} %>
-<%} %>
-
 <% if(errorMsg != null){ %>
 	<p style="color:red;">
 	 <%= errorMsg %></p>
@@ -40,6 +46,6 @@
 	 <%= resultMsg %></p>
 	<%} %>
 
-<a href="/docoTsubu_DB/Main">戻る</a>
+<p><a href="/docoTsubu_DB/Main">戻る</a></p>
 </body>
 </html>

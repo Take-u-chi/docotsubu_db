@@ -45,8 +45,9 @@ public class SignUp extends HttpServlet {
 
 	//ユーザー登録
 		User user = new User(name,pass);
-		if(sul.isSignUp(user)) {
+	//	if(sul.isSignUp(user)) {
 
+		if(sul.isSignUp(user)) {
     //↑TrueならUserをセッションスコープへ保存し登録結果画面へフォワード
         HttpSession session = request.getSession();
         session.setAttribute("loginUser", user);

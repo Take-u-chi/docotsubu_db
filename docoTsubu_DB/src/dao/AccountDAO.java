@@ -32,13 +32,17 @@ public Account findByLogin(User user) {
 			String pass = rs.getString("PASS");
 
 			account = new Account(userId,name,pass);
+		return account;
+		}else {
+			return null;
 		}
 	}catch (SQLException e) {
 		e.printStackTrace();
 		return null;
 	}
-	return account;
-}
+
+	}
+
 
 
 public boolean signUp(User user) {
@@ -54,21 +58,57 @@ public boolean signUp(User user) {
 			String sql = "INSERT INTO ACCOUNT(NAME,PASS) VALUES(?,?)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
+
 	//INSERT文の「?」に使用する値のを設定
 			pStmt.setString(1, user.getName());
 			pStmt.setString(2,user.getPass());
 
 	//INSERT文の実行（）
+
             pStmt.executeUpdate();
-                return true;
+			    return true;
 
 			}catch(SQLException e) {
 				e.printStackTrace();
 				return false;
 			}
 	//INSERT文を実行できなければFalseを返す
-			}else {
-				return false;
+
+		}else {
+		return false;
+		}
 }
+
+
+public boolean register(User user) {
+	try(Connection conn = DriverManager.getConnection(JDBC_URL,DB_USER,DB_PASS)){
+
+		String sql = "SELECT USER_ID,NAME,PASS FROM ACCOUNT";
+		PreparedStatement pStmt = conn.prepareStatement(sql);
+		pStmt.setString(1,user.getName());
+		pStmt.setString(2,user.getPass());
+
+		ResultSet rs = pStmt.executeQuery();
+
+		if(rs.getString("NAME") != user.getName()) {
+			String sql2 = "INSERT INTO ACCOUNT(NAME,PASS) VALUES(?,?)";
+			PreparedStatement pStmt2 = conn.prepareStatement(sql2);
+
+
+	//INSERT文の「?」に使用する値のを設定
+			pStmt2.setString(1, user.getName());
+			pStmt2.setString(2,user.getPass());
+
+	//INSERT文の実行（）
+
+            pStmt.executeUpdate();
+			    return true;
+		}
+	}catch (SQLException e) {
+		e.printStackTrace();
+		return false;
 }
+	return false;
+}
+
 }

@@ -24,9 +24,9 @@
 	<%= loginUser.getName() %>さん、ログイン中
 	<a href="/docoTsubu_DB/Logout">ログアウト</a>
 	</p>
-	<p><a href="/docoTsubu_DB/Main">更新</a></p>
-	<p><a href="/docoTsubu_DB/MutterSearch">検索</a></p>
-	<p><a href="/docoTsubu_DB/MyPage">マイページ</a></p>
+	<p><a href="/docoTsubu_DB/Main">更新</a>
+	<a href="/docoTsubu_DB/MutterSearch">検索</a>
+	<a href="/docoTsubu_DB/MyPage">マイページ</a></p>
 
 <!-- textを受け取りMain.javaへPostリクエスト -->
 	<form action="/docoTsubu_DB/Main"method="post">

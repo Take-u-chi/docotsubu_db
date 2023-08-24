@@ -140,10 +140,12 @@ public List<Mutter> myMutterFindAll(String name){   // 戻り値List<Mutter>
 //データベースへ接続
 	try(Connection conn = DriverManager.getConnection(JDBC_URL,DB_USER,DB_PASS)){
 		String findName = name;
+
 //SELECT文の準備
 	String sql = "SELECT ID,NAME,TEXT FROM MUTTER WHERE NAME=? ORDER BY ID DESC";//ID降順(大きい順)に並び替える
 	PreparedStatement pStmt = conn.prepareStatement(sql);
 	pStmt.setString(1, findName);
+
 //SELECT文の実行
 	ResultSet rs = pStmt.executeQuery();
 

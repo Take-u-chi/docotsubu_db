@@ -12,10 +12,12 @@ public class SignUpLogic {
 			String regex = "^[a-z0-9]{8,16}$";
 			return pass.matches(regex);
 		}
-	 public boolean isSignUp(User user) {
-			 AccountDAO dao = new AccountDAO();
-			 return dao.signUp(user);
-				 }
 
+
+
+	 public boolean isSignUp(User user) {
+		 AccountDAO dao = new AccountDAO();
+		 return dao.register(user);
+	 }
 }
 
